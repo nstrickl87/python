@@ -29,7 +29,27 @@ class User():
         """ Method to reset a users login attempts """
         self.login_attempts = 0
 
+class Admin(User):
+    """ Admin Class that inherits User INformation """
+
+    def __init__(self, first_name, last_name, username, age):
+        super().__init__(first_name, last_name, username, age)
+        self.privileges = Privileges(['can add post', 'can delete post', 'cand ban user'])
+
+class Privileges():
+    """ Privleges Class to define the privleges of a user.admin """
+
+    def __init__(self, privileges):
+        """ Initialize attributes of class. """
+        self.privileges = privileges
+    
+    def show_privileges(self):
+        """ Show the privileges that a user has. """
+        for privilege in self.privileges:
+            print(privilege)
+
 my_user = User("Nathan", "Strickand", "Kilvaari", "33")
+my_admin_user = Admin("Nathan", "Strickland", "Kilvarri Admin", 33)
 my_user.describe_user()
 my_user.greet_user()
 my_user.increment_login_attempts()
@@ -39,3 +59,7 @@ my_user.increment_login_attempts()
 print(str(my_user.login_attempts))
 my_user.reset_login_attempts()
 print(str(my_user.login_attempts))
+
+print(f"\n{my_admin_user.username.title()}")
+
+my_admin_user.privileges.show_privileges()
